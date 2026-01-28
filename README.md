@@ -1,4 +1,27 @@
 # MarcaHub
+# 📐 Architecture Documentation
+
+## 🧩 Business / System Context
+![Business Context](docs/images/architecture/business-context.svg)
+
+---
+
+## 🔄 Core Flows
+![Reserva-Pagamento](docs/images/flows/reserva-pagamento-fluxo.svg)
+---
+
+## 🧠 Containers / Services
+![Containers](docs/images/architecture/containers.svg)
+
+---
+
+## 🚀 Deployment
+
+
+---
+
+## 🗃️ Data Model
+
 
 ```text
 marca-platform/

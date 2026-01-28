@@ -1,0 +1,16 @@
+flowchart LR
+    Empresa[Empresa Cliente]
+    Usuario[Vendedor / Operador]
+
+    Sistema[Sistema de Gestao de Servicos]
+
+    Reservas[Modulo de Reservas]
+    Pagamentos[Modulo de Pagamentos]
+    Analytics[Modulo de Analytics]
+
+    Usuario --> Sistema
+    Empresa --> Sistema
+
+    Sistema --> Reservas
+    Sistema --> Pagamentos
+    Sistema --> Analytics
