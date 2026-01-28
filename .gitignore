@@ -116,6 +116,13 @@ docker-compose.override.yml
 ####################################
 .vite/
 .parcel-cache/
+packages.yml
+packages.lock.yml
+.env
+__pycache__/
+node_modules/
+dist/
+target/
 
 ####################################
 # Misc
