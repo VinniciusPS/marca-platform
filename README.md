@@ -1,5 +1,5 @@
 # MarcaHub
-# 📐 Architecture Documentation
+# Architecture Documentation
 
 ## 🧩 Business / System Context
 ![Business Context](docs/images/architecture/business-context.svg)
@@ -7,7 +7,12 @@
 ---
 
 ## 🔄 Core Flows
+
+### Reserva-Pagamento
 ![Reserva-Pagamento](docs/images/flows/reserva-pagamento-fluxo.svg)
+
+### Analytics
+![Analytics](docs/images/flows/analytics-fluxo.svg)
 ---
 
 ## 🧠 Containers / Services
