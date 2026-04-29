@@ -8,7 +8,7 @@ on:
 jobs:
   migrate:
     runs-on: ubuntu-latest
-    environment: development
+    environment: develop
 
     env:
       DATABASE_URL: ${{ secrets.RENDER_DATABASE_URL }}
