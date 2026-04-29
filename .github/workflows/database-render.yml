@@ -1,0 +1,22 @@
+name: Database Migration - Render
+
+on:
+  push:
+    paths:
+      - "database/migrations/**"
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    environment: development
+
+    env:
+      DATABASE_URL: ${{ secrets.RENDER_DATABASE_URL }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Render migration stack
+        run: |
+          cd runtime/database
+          docker compose -f docker-compose.render.yml run --rm flyway

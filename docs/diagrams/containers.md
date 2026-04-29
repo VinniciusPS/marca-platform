@@ -8,6 +8,7 @@ BFF --> Analytics[Analytics API]
 
 Reservas --> ReservasDB[(Reservas DB)]
 Pagamentos --> PagamentosDB[(Pagamentos DB)]
+Analytics --> AnalyticsDB([Analytics DB])
 
 Reservas --> EventBus[[Event Bus]]
 Pagamentos --> EventBus

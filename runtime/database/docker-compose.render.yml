@@ -1,0 +1,8 @@
+services:
+  flyway:
+    image: flyway/flyway:latest
+    volumes:
+      - ../../database/migrations:/flyway/sql
+    environment:
+      FLYWAY_URL: ${DATABASE_URL}
+    command: migrate
