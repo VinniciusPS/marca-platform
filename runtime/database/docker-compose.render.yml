@@ -4,5 +4,7 @@ services:
     volumes:
       - ../../database/migrations:/flyway/sql
     environment:
-      FLYWAY_URL: ${DATABASE_URL}
+      FLYWAY_URL: ${FLYWAY_URL}
+      FLYWAY_USER: ${FLYWAY_USER}
+      FLYWAY_PASSWORD: ${FLYWAY_PASSWORD}
     command: migrate
