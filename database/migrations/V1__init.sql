@@ -15,6 +15,4 @@ CREATE TABLE IF NOT EXISTS staging.test_events (
 -- Seed de teste
 INSERT INTO staging.test_events (event_name)
 VALUES
-    ('init_event_1'),
-    ('init_event_2'),
-    ('init_event_3');
+    ('init_event_1')
