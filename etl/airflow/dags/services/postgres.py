@@ -1,7 +1,10 @@
-# airflow/services/postgres_service.py
-
+from pathlib import Path
 from sqlalchemy import text
 import time
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+SQL_PATH = BASE_DIR / "repository" / "queries" / "google_trends" / "upsert.sql"
 
 class PostgresService:
 
@@ -10,7 +13,7 @@ class PostgresService:
         self.batch_size = batch_size
 
     def _load_query(self):
-        with open("airflow/repository/queries/upsert.sql") as f:
+        with open(SQL_PATH) as f:
             return text(f.read())
 
     def upsert_batch(self, df):

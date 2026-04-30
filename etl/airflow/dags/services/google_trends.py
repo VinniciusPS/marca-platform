@@ -27,7 +27,7 @@ class GoogleTrendsService:
             data = data.reset_index()
 
             melted = data.melt(
-                id_vars=["date"],
+                id_vars=["source_date"],
                 value_vars=keywords,
                 var_name="keyword",
                 value_name="interest"
