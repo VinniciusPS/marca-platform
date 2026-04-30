@@ -18,5 +18,4 @@ VALUES
     ('init_event_1'),
     ('init_event_2'),
     ('init_event_3'),
-    ('init_event_4'),
-    ('init_event_5');
+    ('init_event_4');
