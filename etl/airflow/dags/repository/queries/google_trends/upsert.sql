@@ -3,8 +3,13 @@ INSERT INTO staging.stg_google_trends (
     interest, created_at, updated_at
 )
 VALUES (
-    to_timestamp(:source_date), :keyword, :group_name, :specialty,
-    :interest, to_timestamp(:ingestion_ts), :updated_at
+    :date,
+    :keyword,
+    :group_name,
+    :specialty,
+    :interest,
+    :ingestion_ts,
+    now()
 )
 ON CONFLICT (source_date, keyword, group_name)
 DO UPDATE SET
