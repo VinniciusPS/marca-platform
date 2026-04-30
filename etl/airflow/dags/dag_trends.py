@@ -5,6 +5,7 @@ from airflow.utils.trigger_rule import TriggerRule
 from datetime import datetime
 
 from services.google_trends import GoogleTrendsService
+from services.google_trends import resolve_timeframe
 from services.postgres import PostgresService
 from services.load_control import LoadControlService
 from repository.connection import get_engine
@@ -31,12 +32,10 @@ def start_load(ti, **kwargs):
 def extract(ti, **kwargs):
     engine = get_engine()
     load_svc = LoadControlService(engine)
+    trends = GoogleTrendsService()
 
     last_watermark = load_svc.get_last_successful_watermark(DATASET_NAME)
-
-    timeframe = "now 2-d" if not last_watermark else "now 1-d"
-
-    trends = GoogleTrendsService()
+    timeframe = resolve_timeframe(last_watermark)
     df = trends.fetch(KEYWORD_GROUPS, timeframe)
 
     if df is None or df.empty:
@@ -61,7 +60,7 @@ def load(ti, **kwargs):
 
     ti.xcom_push(key="rows_loaded", value=len(df))
 
-    last_date = df["date"].max() if not df.empty else None
+    last_date = df["source_date"].max() if not df.empty else None
     ti.xcom_push(key="last_extracted_at", value=str(last_date))
 
 

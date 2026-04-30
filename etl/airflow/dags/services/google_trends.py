@@ -1,8 +1,10 @@
 # airflow/services/google_trends.py
 
 from pytrends.request import TrendReq
+from pytrends.exceptions import TooManyRequestsError
 import pandas as pd
 from datetime import datetime
+import time
 
 class GoogleTrendsService:
 
@@ -18,13 +20,17 @@ class GoogleTrendsService:
             print(f"[EXTRACT] Fetching group: {group}")
 
             self.client.build_payload(keywords, timeframe=timeframe, geo=geo)
-            data = self.client.interest_over_time()
+            data = safe_request(lambda: self.client.interest_over_time())
 
             if data.empty:
                 print(f"[EXTRACT] No data for {group}")
                 continue
 
             data = data.reset_index()
+            data = data.rename(columns={"date": "source_date"})
+            
+            # 1. garantir tipo datetime
+            data["source_date"] = pd.to_datetime(data["source_date"], errors="coerce")
 
             melted = data.melt(
                 id_vars=["source_date"],
@@ -60,3 +66,13 @@ def resolve_timeframe(last_watermark):
 
     print("[WINDOW] Incremental load → last 1 day")
     return "now 1-d"
+
+def safe_request(func, max_retries=5):
+    for i in range(max_retries):
+        try:
+            return func()
+        except TooManyRequestsError:
+            wait = 2 ** i * 5  # 5s, 10s, 20s, 40s...
+            print(f"Rate limit. Waiting {wait}s...")
+            time.sleep(wait)
+    raise Exception("Falha após múltiplas tentativas")
