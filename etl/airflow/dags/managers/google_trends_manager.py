@@ -1,6 +1,3 @@
-from services.google_trends.extractor import GoogleTrendsExtractor
-from services.google_trends.mapper import GoogleTrendsMapper
-from utils.postgres_handler import PostgresHandler
 from itertools import islice
 
 class GoogleTrendsManager:

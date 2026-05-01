@@ -7,7 +7,7 @@ from managers.google_trends_manager import GoogleTrendsManager
 from services.google_trends.extractor import GoogleTrendsExtractor
 from services.google_trends.mapper import GoogleTrendsMapper
 from utils.postgres_handler import PostgresHandler
-from repository.connection import get_engine
+from repository.queries.postgres.connection import get_engine
 
 # Configurações de Teste
 TEST_KEYWORD_GROUPS = {
@@ -17,7 +17,7 @@ TEST_KEYWORD_GROUPS = {
 def load_sql_file():
     """Lógica de carregamento do SQL para evitar paths fixos no Manager"""
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    sql_path = os.path.join(current_dir, "repository/queries/google_trends/upsert.sql")
+    sql_path = os.path.join(current_dir, "repository/queries/postgres/google_trends/upsert.sql")
     with open(sql_path, "r") as f:
         return f.read()
 

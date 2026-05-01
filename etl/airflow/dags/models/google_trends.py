@@ -17,7 +17,6 @@ class GoogleTrendsRawDTO(BaseModel):
 class GoogleTrendsStorageDTO(BaseModel):
     """
     Representa o registro pronto para o Loader. 
-    Os nomes das chaves aqui devem ser idênticos aos parâmetros :nome no arquivo SQL.
     """
     model_config = ConfigDict(from_attributes=True)
     
