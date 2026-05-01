@@ -15,7 +15,7 @@ class GoogleTrendsExtractor:
     def __init__(self, hl: str = "pt-BR", tz: int = -180):
         self.client = TrendReq(hl=hl, tz=tz)
 
-    def fetch_stream(self, keyword_groups: dict, timeframe: str, geo: str = "BR-RJ") -> Generator[GoogleTrendsRawDTO, None, None]:
+    def fetch_stream(self, keyword_groups: dict, timeframe: str, geo: str = "BR") -> Generator[GoogleTrendsRawDTO, None, None]:
         """
         Extrai dados e entrega um stream (generator) de objetos do domínio.
         """

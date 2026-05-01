@@ -3,15 +3,15 @@ INSERT INTO staging.stg_google_trends (
     interest, created_at, updated_at
 )
 VALUES (
-    :date,
+    :source_date,
     :keyword,
     :group_name,
     :specialty,
     :interest,
-    :ingestion_ts,
-    now()
+    :created_at,
+    :updated_at
 )
 ON CONFLICT (source_date, keyword, group_name)
 DO UPDATE SET
     interest = EXCLUDED.interest,
-    updated_at = CURRENT_TIMESTAMP;
+    updated_at = EXCLUDED.updated_at;
