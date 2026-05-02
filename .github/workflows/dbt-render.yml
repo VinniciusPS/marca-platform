@@ -9,6 +9,7 @@ on:
 jobs:
   dbt_task:
     runs-on: ubuntu-latest
+    if: false # Trigger desabilitado
     environment: development
     
     # Definindo envs a nível de job para evitar repetição se houver mais steps
