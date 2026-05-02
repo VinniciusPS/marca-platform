@@ -10,5 +10,5 @@ services:
       - DBT_USER=${DBT_USER}
       - DBT_PASSWORD=${DBT_PASSWORD}
       - DBT_DBNAME=${DBT_DBNAME}
-      - DBT_PORT=${DBT_PORT:-5432}
-      - DBT_SCHEMA=${DBT_SCHEMA:-public}
+      - DBT_PORT=${DBT_PORT}
+      - DBT_SCHEMA=${DBT_SCHEMA}

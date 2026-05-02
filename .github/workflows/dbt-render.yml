@@ -25,6 +25,10 @@ jobs:
 
       - name: Execute dbt Smoke Test
         run: |
+          echo "Verificando se as variáveis estão presentes no Runner:"
+          if [ -z "$DBT_HOST" ]; then echo "DBT_HOST está VAZIO"; else echo "DBT_HOST preenchido (Length: ${#DBT_HOST})"; fi
+          if [ -z "$DBT_PORT" ]; then echo "DBT_PORT está VAZIO"; else echo "DBT_PORT preenchido: $DBT_PORT"; fi
+          
           # Navega até o diretório de runtime onde o compose reside
           cd runtime/etl/dbt/
           
