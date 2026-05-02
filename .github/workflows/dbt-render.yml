@@ -1,7 +1,10 @@
 name: dbt_google_trends_actions
 
 on:
-  workflow_dispatch: # Permite o disparo manual pela aba "Actions" no GitHub
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/dbt-render-db
 
 jobs:
   dbt_task:
