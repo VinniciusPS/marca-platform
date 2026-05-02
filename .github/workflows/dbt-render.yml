@@ -9,6 +9,7 @@ on:
 jobs:
   dbt_task:
     runs-on: ubuntu-latest
+    environment: development
     
     # Definindo envs a nível de job para evitar repetição se houver mais steps
     env:
