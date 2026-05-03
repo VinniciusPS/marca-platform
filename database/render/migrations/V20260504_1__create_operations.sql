@@ -1,5 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS operations;
 
+-- Criação da tabela de contratos profissionais
 CREATE TABLE IF NOT EXISTS operations.professional_contracts (
     professional_id INT,
     specialty VARCHAR(50),
