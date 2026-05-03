@@ -1,3 +1,5 @@
+CREATE SCHEMA IF NOT EXISTS marketing;
+
 -- Tabela para termos de busca relacionados a cada especialidade (para análise de marketing)
 CREATE TABLE IF NOT EXISTS marketing.marketing_search_terms (
     term_id SERIAL PRIMARY KEY,

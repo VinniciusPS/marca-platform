@@ -1,5 +1,4 @@
 CREATE SCHEMA IF NOT EXISTS clinic;
-CREATE SCHEMA IF NOT EXISTS marketing;
 
 -- Especialidades
 CREATE TABLE IF NOT EXISTS clinic.specialties (

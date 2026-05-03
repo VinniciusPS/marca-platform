@@ -1,3 +1,5 @@
+CREATE SCHEMA IF NOT EXISTS operations;
+
 CREATE TABLE operations.professional_contracts (
     professional_id INT,
     specialty VARCHAR(50),
