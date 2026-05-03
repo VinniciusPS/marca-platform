@@ -1,6 +1,3 @@
--- V1__init_schemas_and_test_table.sql
-
--- Schemas base (camada lakehouse simplificada)
 CREATE SCHEMA IF NOT EXISTS staging;
 CREATE SCHEMA IF NOT EXISTS silver;
 CREATE SCHEMA IF NOT EXISTS gold;

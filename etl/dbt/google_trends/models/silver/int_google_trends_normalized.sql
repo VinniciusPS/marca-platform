@@ -11,4 +11,4 @@ select
     src.interest as trend_score,
     src.source_date::date as reference_date
 from source src
-left join specialties s on lower(src.specialty) = lower(s.name)
+join specialties s on lower(src.specialty) = lower(s.name)

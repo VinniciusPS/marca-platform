@@ -1,22 +1,14 @@
 CREATE SCHEMA IF NOT EXISTS clinic;
----
---- 1. DOMÍNIO DE ESPECIALIDADES E MARKETING
----
+CREATE SCHEMA IF NOT EXISTS marketing;
+
+-- Especialidades
 CREATE TABLE IF NOT EXISTS clinic.specialties (
     specialty_id SERIAL PRIMARY KEY,
     name TEXT NOT NULL UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS clinic.marketing_search_terms (
-    term_id SERIAL PRIMARY KEY,
-    specialty_id INTEGER NOT NULL REFERENCES clinic.specialties(specialty_id),
-    search_term TEXT NOT NULL
-);
-
----
---- 2. DOMÍNIO DE PROFISSIONAIS E DISPONIBILIDADE
----
+-- Profissionais e suas agendas (disponibilidade)
 CREATE TABLE IF NOT EXISTS clinic.professionals (
     professional_id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
@@ -27,6 +19,7 @@ CREATE TABLE IF NOT EXISTS clinic.professionals (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Profissionais
 CREATE TABLE IF NOT EXISTS clinic.professional_schedules (
     schedule_id SERIAL PRIMARY KEY,
     professional_id INTEGER NOT NULL REFERENCES clinic.professionals(professional_id),
@@ -37,6 +30,7 @@ CREATE TABLE IF NOT EXISTS clinic.professional_schedules (
     CONSTRAINT chk_time_range CHECK (start_time < end_time)
 );
 
+-- Exceções de agenda (feriados, ausências, etc.)
 CREATE TABLE IF NOT EXISTS clinic.schedule_exceptions (
     exception_id SERIAL PRIMARY KEY,
     professional_id INTEGER NOT NULL REFERENCES clinic.professionals(professional_id),
@@ -46,9 +40,7 @@ CREATE TABLE IF NOT EXISTS clinic.schedule_exceptions (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
----
---- 3. DOMÍNIO DE OPERAÇÃO E PACIENTES
----
+-- Pacientes, CID, Serviços e Agendamentos
 CREATE TABLE IF NOT EXISTS clinic.patients (
     patient_id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
@@ -85,9 +77,7 @@ CREATE TABLE IF NOT EXISTS clinic.appointments (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Fundamental para Lead Time (ML)
 );
 
----
---- 5. ÍNDICES DE ALTA PERFORMANCE (DBT & ML)
----
+-- Indices para otimizar consultas analíticas e operacionais
 CREATE INDEX IF NOT EXISTS idx_app_analytics ON clinic.appointments(appointment_date, professional_id, status);
 CREATE INDEX IF NOT EXISTS idx_app_created_at ON clinic.appointments(created_at);
 CREATE INDEX IF NOT EXISTS idx_sched_analytics ON clinic.professional_schedules(professional_id, day_of_week);

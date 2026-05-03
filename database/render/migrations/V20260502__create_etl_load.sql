@@ -1,3 +1,4 @@
+-- Criando tabela de controle para monitoramento de cargas ETL
 CREATE SCHEMA IF NOT EXISTS control;
 
 CREATE TABLE IF NOT EXISTS control.etl_load (

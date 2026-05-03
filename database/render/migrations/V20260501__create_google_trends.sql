@@ -1,5 +1,4 @@
 -- cria a tabela staging.stg_google_trends para armazenar os dados brutos do Google Trends
-
 CREATE TABLE IF NOT EXISTS staging.stg_google_trends (
     id BIGSERIAL PRIMARY KEY,
 
@@ -16,7 +15,7 @@ CREATE TABLE IF NOT EXISTS staging.stg_google_trends (
         UNIQUE (source_date, keyword, group_name)
 );
 
--- índices para leitura e performance no dbt
+-- índices para leitura e performance 
 
 CREATE INDEX IF NOT EXISTS idx_stg_gt_source_date
     ON staging.stg_google_trends (source_date);

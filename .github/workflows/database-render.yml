@@ -3,7 +3,7 @@ name: Database Migration - Render
 on:
   push:
     paths:
-      - "database/migrations/**"
+      - "database/render/migrations/**"
 
 jobs:
   migrate:
