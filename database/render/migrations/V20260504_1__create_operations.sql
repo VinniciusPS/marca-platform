@@ -1,6 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS operations;
 
-CREATE TABLE operations.professional_contracts (
+CREATE TABLE IF NOT EXISTS operations.professional_contracts (
     professional_id INT,
     specialty VARCHAR(50),
     weekly_hours_contracted INT,
