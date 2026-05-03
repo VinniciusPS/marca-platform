@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: int_appointments_refined
+    description: "Fato de agendamentos limpa com cálculo de duração."
+    columns:
+      - name: appointment_id
+        tests:
+          - unique
+          - not_null
+
+  - name: int_google_trends_normalized
+    description: "Dados do Trends vinculados ao specialty_id da clínica via join de texto."
+    columns:
+      - name: specialty_id
+        tests:
+          - not_null:
+              severity: warn
+              description: "Alerta se uma keyword do Trends não mapear para uma especialidade real."

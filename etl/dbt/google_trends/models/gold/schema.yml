@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: fct_clinic_occupancy_insights
+    description: "Modelo final com Ocupação vs Trends para tomada de decisão."
+    tests:
+      - dbt_utils.expression_is_true:
+          expression: "occupancy_rate <= 100" # Regra de sanidade
+    columns:
+      - name: specialty_id
+        tests:
+          - not_null
+      - name: insight_action
+        description: "Ação sugerida: ESCALAR, OTIMIZAR, EXPANDIR ou ESTABILIDADE."
+        tests:
+          - accepted_values:
+              values: ['ESCALAR', 'OTIMIZAR', 'EXPANDIR', 'ESTABILIDADE']
