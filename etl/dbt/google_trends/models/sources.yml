@@ -1,28 +1,26 @@
 version: 2
 
 sources:
-  - name: clinic_source
-    schema: clinic 
+  - name: clinic
+    schema: clinic
     tables:
-      - name: specialties
-      - name: professionals
-      - name: professional_schedules
-      - name: schedule_exceptions
-      - name: services
-      - name: cid_codes
-      - name: patients
       - name: appointments
-        columns:
-          - name: appointment_id
-            tests:
-              - unique
-              - not_null
+      - name: professionals
+      - name: services
+      - name: specialties
 
-  - name: staging_source
+  - name: marketing
+    schema: marketing
+    tables:
+      - name: marketing_benchmarks
+      - name: marketing_search_terms
+
+  - name: operations
+    schema: operations
+    tables:
+      - name: professional_contracts
+
+  - name: staging
     schema: staging
     tables:
       - name: stg_google_trends
-        loaded_at_field: updated_at
-        freshness:
-          warn_after: {count: 24, period: hour}
-          error_after: {count: 48, period: hour}
