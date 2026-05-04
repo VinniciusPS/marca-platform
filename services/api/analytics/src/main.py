@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from interfaces.api.routes import router as patient_router
+from interfaces.api.routes import router as patient_router, analytics_router
 
 def create_app() -> FastAPI:
     """Configura e instancia a aplicação FastAPI."""
@@ -24,3 +24,4 @@ def create_app() -> FastAPI:
 
 # Instância que será referenciada no Docker Compose (src.main:app)
 app = create_app()
+app.include_router(analytics_router)

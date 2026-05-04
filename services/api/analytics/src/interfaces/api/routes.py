@@ -1,7 +1,9 @@
+from dataclasses import asdict
 from fastapi import APIRouter, Depends, HTTPException
+from domain.models.capacity import CapacityAlert
 from sqlalchemy.ext.asyncio import AsyncSession
 from infraestructure.database import get_db
-from infraestructure.persistence.repository import PatientRepository
+from infraestructure.persistence.repository import AnalyticsRepository, PatientRepository
 from application.services.patient_service import PatientService
 from pydantic import BaseModel
 
@@ -48,3 +50,12 @@ async def delete(
     if not success:
         raise HTTPException(status_code=404, detail="Patient not found")
     return {"status": "deleted"}
+
+analytics_router = APIRouter(prefix="/api/v1/analytics", tags=["Analytics"])
+
+@analytics_router.get("/capacity-alerts", response_model=list[CapacityAlert])
+async def get_alerts(db: AsyncSession = Depends(get_db)):
+    repository = AnalyticsRepository(db)
+    alerts = await repository.get_capacity_alerts()
+
+    return [asdict(alert) for alert in alerts]

@@ -4,6 +4,9 @@ from typing import List, Optional
 from domain.models.patient import Patient
 from infraestructure.persistence.models import PatientTable
 
+from src.infraestructure.persistence.models import CapacityAlertView
+from src.domain.models.capacity import CapacityAlert
+
 class PatientRepository:
     def __init__(self, session: AsyncSession):
         """Injeção de dependência da sessão assíncrona."""
@@ -48,3 +51,25 @@ class PatientRepository:
         result = await self.session.execute(stmt)
         await self.session.commit()
         return result.rowcount > 0
+    
+class AnalyticsRepository:
+    def __init__(self, session: AsyncSession):
+        self.session = session
+
+    async def get_capacity_alerts(self) -> list[CapacityAlert]:
+        result = await self.session.execute(select(CapacityAlertView))
+        rows = result.scalars().all()
+        return [
+            CapacityAlert(
+                professional_name=r.professional_name,
+                specialty=r.specialty,
+                weekly_fixed_cost=float(r.weekly_fixed_cost),
+                be_threshold_units=r.be_threshold_units,
+                service_price=float(r.service_price),
+                variable_cost_per_service=float(r.variable_cost_per_service),
+                actual_appointments=r.actual_appointments,
+                margin_per_appointment=float(r.margin_per_appointment),
+                weekly_net_profit=float(r.weekly_net_profit),
+                actionable_insight=r.actionable_insight
+            ) for r in rows
+        ]
