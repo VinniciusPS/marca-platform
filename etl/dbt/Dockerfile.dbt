@@ -1,0 +1,17 @@
+FROM python:3.11-slim
+
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /usr/app
+
+# Instalação do dbt-postgres
+RUN pip install --no-cache-dir "dbt-postgres>=1.7.0,<1.9.0"
+
+# Copia o projeto google_trends
+COPY ./google_trends /usr/app/
+
+# Configurações de ambiente para o dbt encontrar os arquivos internamente
+ENV DBT_PROFILES_DIR=/usr/app
+ENV DBT_PROJECT_DIR=/usr/app
+
+ENTRYPOINT ["dbt"]
