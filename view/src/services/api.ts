@@ -4,7 +4,7 @@
  * services stay slim and easy to swap for axios/react-query later.
  */
 const API_BASE_URL =
-  (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? "/api";
+  (import.meta.env.VITE_API_URL as string | undefined) ?? "/api";
 
 export class ApiError extends Error {
   constructor(public status: number, message: string) {
