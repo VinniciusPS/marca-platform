@@ -1,0 +1,41 @@
+name: dbt_google_trends_actions
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/dbt-render-db
+
+jobs:
+  dbt_task:
+    runs-on: ubuntu-latest
+    if: false # Trigger desabilitado
+    environment: development
+    
+    # Definindo envs a nível de job para evitar repetição se houver mais steps
+    env:
+      DBT_HOST: ${{ secrets.RENDER_DATABASE_HOST }}
+      DBT_USER: ${{ secrets.RENDER_DATABASE_USER }}
+      DBT_PASSWORD: ${{ secrets.RENDER_DATABASE_PASSWORD }}
+      DBT_DBNAME: ${{ secrets.RENDER_DATABASE_DB }}
+      DBT_PORT: ${{ secrets.RENDER_DATABASE_PORT }}
+      DBT_SCHEMA: ${{ secrets.RENDER_DATABASE_SILVER_SCHEMA }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Execute dbt Smoke Test
+        run: |
+          echo "Verificando se as variáveis estão presentes no Runner:"
+          if [ -z "$DBT_HOST" ]; then echo "DBT_HOST está VAZIO"; else echo "DBT_HOST preenchido (Length: ${#DBT_HOST})"; fi
+          if [ -z "$DBT_PORT" ]; then echo "DBT_PORT está VAZIO"; else echo "DBT_PORT preenchido: $DBT_PORT"; fi
+          
+          # Navega até o diretório de runtime onde o compose reside
+          cd runtime/etl/dbt/
+          
+          # Build "limpo" garantindo que o Dockerfile.actions seja utilizado
+          docker compose -f docker-compose.dbt.yml build --no-cache
+          
+          # Execução isolada da model de teste
+          docker compose -f docker-compose.dbt.yml run --rm dbt build --select smoke_test

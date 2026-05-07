@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: gld__capacity_alert
+    description: "Visão de gestão: Alerta se o volume de consultas (clinic.appointments) cobre o custo fixo (operations.professional_contracts)."
+    columns:
+      - name: weekly_net_profit
+        description: "Resultado final da semana: (Margem de 160 * Consultas) - Custo de 2400."
+      - name: actionable_insight
+        tests:
+          - not_null
+
+  - name: gld__mkt_decision_matrix
+    description: "Matriz de Marketing: Calcula viabilidade do Ads baseada na elasticidade (0.7) e margem líquida (80)."
+    columns:
+      - name: projected_cac
+        description: "Novo CPC / CVR histórica (10%)."
+      - name: liquid_margin_after_cac
+        description: "Margem líquida após o CAC. Se < 0, o marketing está perdendo dinheiro."

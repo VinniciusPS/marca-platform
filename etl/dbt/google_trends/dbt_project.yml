@@ -1,0 +1,18 @@
+# dbt/google_trends/dbt_project.yml
+
+name: 'google_trends'
+version: '1.0.0'
+config-version: 2
+
+profile: 'renderdb_profile' # Nome que deve estar no profiles.yml
+
+model-paths: ["models"] # O dbt buscará /usr/app/models/ dentro do container
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+
+models:
+  google_trends: # Nome do projeto definido acima
+    example:
+      +materialized: view

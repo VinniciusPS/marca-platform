@@ -1,0 +1,10 @@
+services:
+  flyway:
+    image: flyway/flyway:latest
+    volumes:
+      - ../../database/render/migrations:/flyway/sql
+    environment:
+      FLYWAY_URL: ${FLYWAY_URL}
+      FLYWAY_USER: ${FLYWAY_USER}
+      FLYWAY_PASSWORD: ${FLYWAY_PASSWORD}
+    command: migrate

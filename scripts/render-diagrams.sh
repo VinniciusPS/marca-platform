@@ -7,7 +7,7 @@ IMAGES_DIR="$DOCS_DIR/images"
 
 mkdir -p "$DIAGRAMS_DIR" "$IMAGES_DIR"
 
-echo "📄 Processando arquivos .md com Mermaid..."
+echo "Processando arquivos .md com Mermaid..."
 
 find "$DOCS_DIR" -name "*.md" | while read -r md; do
 
@@ -32,7 +32,7 @@ find "$DOCS_DIR" -name "*.md" | while read -r md; do
 
   [ -z "$mermaid" ] && continue
 
-  echo "🧩 Gerando $mmd"
+  echo "Gerando $mmd"
   mkdir -p "$(dirname "$mmd")"
   echo "$mermaid" > "$mmd"
 

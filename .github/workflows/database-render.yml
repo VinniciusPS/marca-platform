@@ -1,0 +1,28 @@
+name: Database Migration - Render
+
+on:
+  push:
+    paths:
+      - "database/render/migrations/**"
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    environment: development
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Render migration stack
+        env:
+          FLYWAY_URL: ${{ secrets.RENDER_JDBC_URL }}
+          FLYWAY_USER: ${{ secrets.RENDER_DATABASE_USER }}
+          FLYWAY_PASSWORD: ${{ secrets.RENDER_DATABASE_PASSWORD }}
+        run: |
+          echo "USER=$FLYWAY_USER"
+          echo "URL=$FLYWAY_URL"
+          cd runtime/database
+          export FLYWAY_URL
+          export FLYWAY_USER
+          export FLYWAY_PASSWORD
+          docker compose -f docker-compose.render.yml run --rm flyway
