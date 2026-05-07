@@ -31,3 +31,15 @@ class CapacityAlertView(Base):
     margin_per_appointment: Mapped[float] = mapped_column(Numeric)
     weekly_net_profit: Mapped[float] = mapped_column(Numeric)
     actionable_insight: Mapped[str] = mapped_column(Text)
+
+class MktDecisionView(Base):
+    """Mapeamento da View gld__mkt_decision no schema gold."""
+    __tablename__ = "gld__mkt_decision_matrix"
+    __table_args__ = {"schema": "silver"}
+
+    specialty: Mapped[str] = mapped_column(String(50), primary_key=True)
+    scenario_delta: Mapped[int] = mapped_column(Integer)
+    novo_cpc: Mapped[float] = mapped_column(Numeric(10, 2))
+    projected_cac: Mapped[float] = mapped_column(Numeric(10, 2))
+    liquid_margin_after_cac: Mapped[float] = mapped_column(Numeric(10, 2))
+    mkt_strategy_status: Mapped[str] = mapped_column(String(50))

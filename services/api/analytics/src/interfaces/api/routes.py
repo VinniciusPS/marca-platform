@@ -1,9 +1,10 @@
 from dataclasses import asdict
 from fastapi import APIRouter, Depends, HTTPException
 from domain.models.capacity import CapacityAlert
+from src.domain.models.mkt_decision import MktDecision
 from sqlalchemy.ext.asyncio import AsyncSession
 from infraestructure.database import get_db
-from infraestructure.persistence.repository import AnalyticsRepository, PatientRepository
+from infraestructure.persistence.repository import CapacityRepository, MktDecisionRepository, PatientRepository
 from application.services.patient_service import PatientService
 from pydantic import BaseModel
 
@@ -55,7 +56,14 @@ analytics_router = APIRouter(prefix="/api/v1/analytics", tags=["Analytics"])
 
 @analytics_router.get("/capacity-alerts", response_model=list[CapacityAlert])
 async def get_alerts(db: AsyncSession = Depends(get_db)):
-    repository = AnalyticsRepository(db)
+    repository = CapacityRepository(db)
     alerts = await repository.get_capacity_alerts()
 
     return [asdict(alert) for alert in alerts]
+
+@analytics_router.get("/mkt-decisions", response_model=list[MktDecision])
+async def get_mkt_decisions(db: AsyncSession = Depends(get_db)):
+    repository = MktDecisionRepository(db)
+    decisions = await repository.get_mkt_decisions()
+
+    return [asdict(decision) for decision in decisions]
