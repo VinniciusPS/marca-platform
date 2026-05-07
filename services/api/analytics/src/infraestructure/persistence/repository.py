@@ -2,10 +2,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, delete, update
 from typing import List, Optional
 from domain.models.patient import Patient
-from infraestructure.persistence.models import PatientTable
+from infraestructure.persistence.models import MktDecisionView, PatientTable
 
 from src.infraestructure.persistence.models import CapacityAlertView
 from src.domain.models.capacity import CapacityAlert
+from src.domain.models.mkt_decision import MktDecision
 
 class PatientRepository:
     def __init__(self, session: AsyncSession):
@@ -52,7 +53,7 @@ class PatientRepository:
         await self.session.commit()
         return result.rowcount > 0
     
-class AnalyticsRepository:
+class CapacityRepository:
     def __init__(self, session: AsyncSession):
         self.session = session
 
@@ -71,5 +72,23 @@ class AnalyticsRepository:
                 margin_per_appointment=float(r.margin_per_appointment),
                 weekly_net_profit=float(r.weekly_net_profit),
                 actionable_insight=r.actionable_insight
+            ) for r in rows
+        ]
+    
+class MktDecisionRepository:
+    def __init__(self, session: AsyncSession):
+        self.session = session
+
+    async def get_mkt_decisions(self) -> list[MktDecisionView]:
+        result = await self.session.execute(select(MktDecisionView))
+        rows = result.scalars().all()
+        return [
+            MktDecision(
+                specialty=r.specialty,
+                scenario_delta=r.scenario_delta,
+                novo_cpc=float(r.novo_cpc),
+                projected_cac=float(r.projected_cac),
+                liquid_margin_after_cac=float(r.liquid_margin_after_cac),
+                mkt_strategy_status=r.mkt_strategy_status
             ) for r in rows
         ]
