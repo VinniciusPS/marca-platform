@@ -16,7 +16,7 @@ const MOCK_DATA: MarketingAnalytics[] = [
 ];
 
 // Corrigido: Se VITE_USE_MOCK for "true", usa o mock. Caso contrário, vai para a API.
-const SHOULD_USE_MOCK = import.meta.env.VITE_USE_MOCK === "true";
+const SHOULD_USE_MOCK = import.meta.env.VITE_USE_MOCK === "false";
 
 export const marketingService = {
   async list(): Promise<MarketingAnalytics[]> {
