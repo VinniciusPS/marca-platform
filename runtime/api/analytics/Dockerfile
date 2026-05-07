@@ -16,6 +16,6 @@ RUN pip install --no-cache-dir \
 
 COPY services/api/analytics/ .
 
-ENV PYTHONPATH=/usr/app
+ENV PYTHONPATH=/usr/app:/usr/app/src
 
 CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
