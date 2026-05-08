@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from interfaces.api.routes import router as patient_router, analytics_router
@@ -28,7 +30,10 @@ app = create_app()
 app.include_router(analytics_router)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"], 
+    allow_origins=[
+        "http://localhost:5173",
+        os.getenv("VERCEL_FRONT_URL")
+        ], 
     allow_credentials=True,
     allow_methods=["*"], 
     allow_headers=["*"],
