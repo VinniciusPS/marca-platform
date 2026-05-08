@@ -40,7 +40,7 @@ const MOCK_DATA: OperationsRow[] = [
   },
 ];
 
-const USE_MOCK = (import.meta.env.VITE_USE_MOCK ?? "true") === "true";
+const USE_MOCK = (import.meta.env.VITE_USE_MOCK ?? "true") === "false";
 
 export const operationsService = {
   async list(): Promise<OperationsRow[]> {
@@ -48,6 +48,6 @@ export const operationsService = {
       await new Promise((r) => setTimeout(r, 200));
       return MOCK_DATA;
     }
-    return apiFetch<OperationsRow[]>("/operations/analytics");
+    return apiFetch<OperationsRow[]>("/analytics/capacity-alerts");
   },
 };
