@@ -10,3 +10,5 @@ CREATE TABLE IF NOT EXISTS operations.professional_contracts (
     variable_cost_per_service DECIMAL(10,2), 
     be_threshold_units INT 
 );
+
+-- Update Render DB  
