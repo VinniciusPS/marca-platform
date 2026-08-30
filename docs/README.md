@@ -1,116 +1,72 @@
-# Arquitetura do Sistema
+# Documentação Arquitetural
 
-Este diretório contém a documentação arquitetural do sistema, organizada para
-evoluir de forma incremental, versionável e com baixo acoplamento à tecnologia.
+Este diretório contém a documentação arquitetural do sistema, organizada para evoluir de forma incremental, versionável e com baixo acoplamento à tecnologia.
 
-A documentação segue os princípios do **C4 Model**, **Architecture Decision Records (ADR)**
-e **diagramas como código**.
+A documentação segue os princípios do **C4 Model** e **Architecture Decision Records (ADR)**, com diagramas mantidos como código.
 
----
+## Ordem de Leitura Recomendada
 
-## 🎯 Como ler esta documentação
+A documentação segue uma progressão de conhecimento:
 
-A documentação é organizada por **níveis de estabilidade**.
+1. **Arquitetura** — O QUE o sistema é e como está estruturado
+2. **Decisões** — POR QUE as escolhas arquiteturais foram feitas
+3. **Deployment** — COMO o sistema está implementado atualmente
+4. **Diagramas** — Representações visuais dos fluxos e componentes
 
-Recomenda-se a seguinte ordem de leitura:
+## Arquitetura (Modelo C4)
 
-1. **Arquitetura (O QUE o sistema é)**
-2. **Decisões (POR QUE ele é assim)**
-3. **Deployment (COMO ele está implementado hoje)**
-4. **Experimentos (EVIDÊNCIAS que suportam decisões)**
+Descrições conceituais e estáveis do sistema, independentes de tecnologia específica.
 
----
+- `architecture/context.md` — Contexto do sistema, atores principais e integrações externas
+- `architecture/containers.md` — Principais blocos de sistema e responsabilidades
+- `architecture/components.md` — Decomposição estrutural dos componentes
 
-## 🧱 Arquitetura (C4)
+## Decisões Arquiteturais (ADR)
 
-Documentos conceituais e estáveis que descrevem o sistema independentemente de
-tecnologia ou implementação.
+Registro formal das decisões arquiteturais relevantes, alternativas consideradas e consequências.
 
-- `architecture/context.md`  
-  Contexto do sistema, atores e integrações externas.
+Cada ADR documenta uma decisão importante e pode ser revisitada conforme o sistema evolui.
 
-- `architecture/containers.md`  
-  Principais blocos do sistema e suas responsabilidades.
+- `decisions/adr-001-separate-booking-and-payments-apis.md` — Separação de domínios de reservas e pagamentos
+- `decisions/adr-002-bff-pattern.md` — Adoção de Backend-for-Frontend como orquestrador
+- `decisions/adr-003-event-bus-pattern.md` — Comunicação assíncrona entre serviços
+- `decisions/adr-004-analytics-db.md` — Estratégia de banco analítico separado
 
-- `architecture/use-cases.md`  
-  Casos de uso e cenários principais.
+## Deployment (Estado Atual)
 
-- `architecture/components/`  
-  Nível de componentes (quando aplicável).
+Documentação de como a arquitetura está implementada na prática. Estes documentos refletem o estado real e podem mudar com frequência.
 
----
+- `deployment/current.md` — Topologia de deployment e componentes implementados
 
-## 🧠 Decisões Arquiteturais (ADR)
+## Diagramas
 
-Registro das decisões arquiteturais relevantes, incluindo alternativas consideradas
-e consequências.
+Representações visuais dos fluxos, estrutura de containers e casos de uso.
 
-Cada ADR representa **uma decisão importante** e pode ser revisitada ao longo do tempo.
+- `diagrams/context.md` — Diagrama de contexto do sistema
+- `diagrams/containers.md` — Diagrama de containers e dependências
+- `diagrams/flow-booking-payments.md` — Fluxo de reserva e pagamento
+- `diagrams/flow-analytics.md` — Fluxo de processamento de dados analíticos
+- `diagrams/use-cases.md` — Casos de uso principais
 
-- `decisions/adr-001-analytics-async.md`  
-- `decisions/adr-002-bff-pattern.md`
-
----
-
-## 🚀 Deployment (estado atual)
-
-Documentos que descrevem **como a arquitetura está implementada atualmente**.
-Estes documentos são considerados voláteis e podem mudar com frequência.
-
-- `deployment/current.md`  
-- `deployment/assumptions.md`
-
----
-
-## 🧪 Experimentos e Evidências
-
-Resultados de experimentos, testes de carga e medições utilizados para validar
-ou orientar decisões arquiteturais.
-
-- `experiments/load-test-baseline.md`
-- `experiments/analytics-offload.md`
-- `experiments/redis-impact.md`
-
----
-
-## 📐 Diagramas
-
-Os diagramas arquiteturais são mantidos como código utilizando Mermaid.
-
-- Código-fonte: `diagrams/`
-- Imagens renderizadas: `images/`
-
-As imagens são **geradas automaticamente** e não devem ser editadas manualmente.
-
----
-
-## 🔄 Evolução da arquitetura
-
-A arquitetura é esperada evoluir ao longo do tempo.
-
-Boas práticas:
-- Mudanças estruturais → atualizar **Arquitetura**
-- Mudanças de tecnologia → criar ou atualizar **ADR**
-- Mudanças de infra → atualizar **Deployment**
-- Decisões relevantes → registrar evidências em **Experimentos**
-
----
-
-## 📌 Convenções
+## Convenções de Documentação
 
 - Arquitetura conceitual não referencia tecnologia específica
-- Tecnologias e trade-offs são documentados apenas em ADRs
-- Diagramas são representações visuais, não a fonte da verdade
-- Este README é o único ponto de navegação entre documentos
+- Tecnologias e trade-offs são documentados em ADRs
+- Diagramas são representações visuais e complementam, não substituem, a documentação
+- Alterações estruturais exigem atualização correspondente em `architecture/`
+- Mudanças de tecnologia exigem nova ADR ou atualização da ADR existente
+- Mudanças de implementação exigem atualização de `deployment/`
 
----
+## Rastreabilidade
 
-## 🧭 Público-alvo
+Toda decisão arquitetural deve ser localizável através de:
 
-Esta documentação é destinada a:
-- Desenvolvedores
-- Tech Leads
-- Arquitetos
-- Stakeholders técnicos
-
-O objetivo é facilitar entendimento, discussão e evolução do sistema.
+```text
+requirement/use-case
+   ↓
+architecture
+   ↓
+decision (ADR)
+   ↓
+diagram (referência visual)
+```
