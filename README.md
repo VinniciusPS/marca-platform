@@ -1,260 +1,261 @@
+[English](README.md) | [Português](README.pt-BR.md)
 
 # Marca Platform
 
-Plataforma de gestão integrada para operações de clínica/serviços, combinando agendamento, processamento de pagamentos e analytics operacional.
+Integrated management platform for clinic/service operations, combining appointment scheduling, payment processing, and operational analytics.
 
-## Visão Geral
+## Overview
 
-Marca Platform é um sistema orientado a domínios que permite que empresas gerenciem:
+Marca Platform is a domain-oriented system that enables businesses to manage:
 
-- **Reservas de Serviços** — Agendamento, disponibilidade e confirmação de consultas/serviços
-- **Processamento de Pagamentos** — Autorização, processamento e reconciliação de transações
-- **Analytics Operacional** — Métricas de negócio, tendências de mercado e decisões estratégicas
+- **Service Reservations** — Scheduling, availability, and confirmation of appointments/services
+- **Payment Processing** — Authorization, transaction processing, and reconciliation
+- **Operational Analytics** — Business metrics, market trends, and strategic decisions
 
-O sistema é organizado como uma arquitetura de microsserviços com separação clara de responsabilidades, comunicação assíncrona e uma camada de dados analítica isolada.
+The system is organized as a microservices architecture with clear separation of concerns, asynchronous communication, and an isolated analytics data layer.
 
-## Primeiros Passos
+## Getting Started
 
-### Para desenvolvedores iniciando o projeto
+### For developers new to the project
 
-1. Comece lendo a documentação arquitetural:
-   - [`docs/architecture/context.md`](docs/architecture/context.md) — Entenda o contexto geral
-   - [`docs/architecture/containers.md`](docs/architecture/containers.md) — Veja os componentes principais
+1. Start with architectural documentation:
+   - [`docs/architecture/context.md`](docs/architecture/context.md) — Understand the overall context
+   - [`docs/architecture/containers.md`](docs/architecture/containers.md) — See the main components
 
-2. Consulte os diagramas para visualizar fluxos:
-   - [`docs/diagrams/context.md`](docs/diagrams/context.md) — Diagrama de contexto
-   - [`docs/diagrams/flow-booking-payments.md`](docs/diagrams/flow-booking-payments.md) — Fluxo principal
+2. Review diagrams to visualize flows:
+   - [`docs/diagrams/context.md`](docs/diagrams/context.md) — Context diagram
+   - [`docs/diagrams/flow-booking-payments.md`](docs/diagrams/flow-booking-payments.md) — Main flow
 
-3. Entenda as decisões arquiteturais:
-   - [`docs/decisions/adr-002-bff-pattern.md`](docs/decisions/adr-002-bff-pattern.md) — Por que BFF?
-   - [`docs/decisions/adr-001-separate-booking-and-payments-apis.md`](docs/decisions/adr-001-separate-booking-and-payments-apis.md) — Por que APIs separadas?
+3. Understand architectural decisions:
+   - [`docs/decisions/adr-002-bff-pattern.md`](docs/decisions/adr-002-bff-pattern.md) — Why BFF?
+   - [`docs/decisions/adr-001-separate-booking-and-payments-apis.md`](docs/decisions/adr-001-separate-booking-and-payments-apis.md) — Why separate APIs?
 
-4. Revise o estado atual de implementação:
-   - [`docs/deployment/current.md`](docs/deployment/current.md) — O que está implementado
+4. Review current implementation state:
+   - [`docs/deployment/current.md`](docs/deployment/current.md) — What is implemented
 
-## Estrutura do Repositório
+## Repository Structure
 
 ```
 .
-├── docs/                          # Documentação arquitetural
-│   ├── README.md                  # Guia de leitura da documentação
-│   ├── architecture/              # Definições conceituais (C4 Model)
-│   ├── decisions/                 # Decisões arquiteturais (ADR)
-│   ├── deployment/                # Estado de implementação atual
-│   ├── diagrams/                  # Diagramas como código (Mermaid)
-│   ├── issues/                    # Planejamento e state de evolução
-│   └── requirements/              # Especificações funcionais e não-funcionais
+├── docs/                          # Architectural documentation
+│   ├── README.md                  # Documentation reading guide
+│   ├── architecture/              # Conceptual definitions (C4 Model)
+│   ├── decisions/                 # Architectural decisions (ADR)
+│   ├── deployment/                # Current implementation state
+│   ├── diagrams/                  # Diagrams as code (Mermaid)
+│   ├── issues/                    # Planning and evolution state
+│   └── requirements/              # Functional and non-functional specs
 │
-├── services/                      # Serviços backend
+├── services/                      # Backend services
 │   ├── api/
-│   │   ├── booking/               # API de Reservas
-│   │   ├── payments/              # API de Pagamentos
-│   │   └── analytics/             # API de Analytics
+│   │   ├── booking/               # Reservations API
+│   │   ├── payments/              # Payments API
+│   │   └── analytics/             # Analytics API
 │   └── bff/                       # Backend-for-Frontend
 │
 ├── view/                          # Frontend Web
 │   └── src/                       # React/Vite/Tailwind
 │
-├── etl/                           # Orquestração e transformação de dados
-│   ├── airflow/                   # DAGs de extração
-│   └── dbt/                       # Modelos de transformação
+├── etl/                           # Data orchestration and transformation
+│   ├── airflow/                   # Extraction DAGs
+│   └── dbt/                       # Transformation models
 │
-├── database/                      # Esquemas e migrações
+├── database/                      # Schemas and migrations
 │   └── migrations/                # Flyway migrations
 │
-├── deploy/                        # Configurações de deployment
-│   ├── dev/                       # Ambiente de desenvolvimento
-│   └── prd/                       # Ambiente de produção
+├── deploy/                        # Deployment configurations
+│   ├── dev/                       # Development environment
+│   └── prd/                       # Production environment
 │
-└── scripts/                       # Utilitários e automação
+└── scripts/                       # Utilities and automation
 ```
 
-## Arquitetura
+## Architecture
 
-### Modelo Conceitual
+### Conceptual Model
 
-A plataforma segue o **C4 Model** para documentação de arquitetura:
+The platform follows the **C4 Model** for architecture documentation:
 
-- **Contexto** — Atores, sistemas externos e limites
-- **Containers** — Componentes executáveis (serviços, bancos, frontends)
-- **Componentes** — Decomposição interna de containers
-- **Código** — Implementação
+- **Context** — Actors, external systems, and boundaries
+- **Containers** — Executable components (services, databases, frontends)
+- **Components** — Internal decomposition of containers
+- **Code** — Implementation
 
-Documentação detalhada: [`docs/README.md`](docs/README.md)
+Detailed documentation: [`docs/README.md`](docs/README.md)
 
-### Padrões Arquiteturais
+### Architectural Patterns
 
 #### Backend-for-Frontend (BFF)
-O BFF orquestra as chamadas para os serviços de domínio, fornecendo uma interface otimizada para o frontend.
+The BFF orchestrates calls to domain services, providing an interface optimized for the frontend.
 
-- **Decisão**: [`adr-002-bff-pattern.md`](docs/decisions/adr-002-bff-pattern.md)
+- **Decision**: [`adr-002-bff-pattern.md`](docs/decisions/adr-002-bff-pattern.md)
 
-#### Separação de Domínios
-Reservas e Pagamentos são APIs independentes com:
-- Bancos de dados próprios
-- Ciclos de deploy desacoplados
-- Contratos bem definidos
+#### Domain Separation
+Reservations and Payments are independent APIs with:
+- Own databases
+- Decoupled deployment cycles
+- Well-defined contracts
 
-- **Decisão**: [`adr-001-separate-booking-and-payments-apis.md`](docs/decisions/adr-001-separate-booking-and-payments-apis.md)
+- **Decision**: [`adr-001-separate-booking-and-payments-apis.md`](docs/decisions/adr-001-separate-booking-and-payments-apis.md)
 
-#### Comunicação Assíncrona
-Serviços se comunicam através de um Event Bus para reduzir acoplamento.
+#### Asynchronous Communication
+Services communicate through an Event Bus to reduce coupling.
 
-- **Decisão**: [`adr-003-event-bus-pattern.md`](docs/decisions/adr-003-event-bus-pattern.md)
+- **Decision**: [`adr-003-event-bus-pattern.md`](docs/decisions/adr-003-event-bus-pattern.md)
 
-#### Analytics Isolado
-Banco de dados analítico separado, alimentado por ETL, para OLAP e decisões.
+#### Isolated Analytics
+Separate analytics database, fed by ETL, for OLAP and decision-making.
 
-- **Decisão**: [`adr-004-analytics-db.md`](docs/decisions/adr-004-analytics-db.md)
+- **Decision**: [`adr-004-analytics-db.md`](docs/decisions/adr-004-analytics-db.md)
 
-## Dados
+## Data
 
-### Banco de Dados Principal
-PostgreSQL com múltiplos schemas:
+### Primary Database
+PostgreSQL with multiple schemas:
 
-- **clinic** — Pacientes, profissionais, agendas
-- **operations** — Contratos e operações
-- **marketing** — Termos de tendência e estratégia
-- **staging** — Dados brutos do ETL
-- **silver/gold** — Modelos enriquecidos para analytics
-- **control** — Auditoria de cargas
+- **clinic** — Patients, professionals, schedules
+- **operations** — Contracts and operations
+- **marketing** — Trend terms and strategy
+- **staging** — Raw ETL data
+- **silver/gold** — Enriched models for analytics
+- **control** — Load audit trail
 
-### Pipeline de Dados
-1. **Extração** — Airflow extrai dados de fontes (e.g., Google Trends)
-2. **Staging** — Dados brutos persistidos em PostgreSQL
-3. **Transformação** — dbt transforma em modelos silver/gold
-4. **Consumo** — API de Analytics expõe dados via REST
+### Data Pipeline
+1. **Extraction** — Airflow extracts data from sources (e.g., Google Trends)
+2. **Staging** — Raw data persisted in PostgreSQL
+3. **Transformation** — dbt transforms into silver/gold models
+4. **Consumption** — Analytics API exposes data via REST
 
-## Componentes Principais
+## Main Components
 
 ### Frontend (`view/`)
 - React + Vite + Tailwind
-- Testes com Vitest
-- Linting com ESLint
+- Tests with Vitest
+- Linting with ESLint
 
-**Status**: Funcional
+**Status**: Functional
 
 ### BFF (`services/bff/`)
 - Java + SpringBoot
-- Orquestra serviços de domínio
+- Orchestrates domain services
 
-**Status**: Estrutura inicial, implementação em progresso
+**Status**: Initial structure, implementation in progress
 
-### API de Reservas (`services/api/booking/`)
-- Python + FastAPI (planejado)
+### Reservations API (`services/api/booking/`)
+- Python + FastAPI (planned)
 
-**Status**: Estrutura de arquitetura, sem implementação funcional
+**Status**: Architecture structure, no functional implementation
 
-### API de Pagamentos (`services/api/payments/`)
-- Python + FastAPI (planejado)
-- Integração com gateway externo
+### Payments API (`services/api/payments/`)
+- Python + FastAPI (planned)
+- External gateway integration
 
-**Status**: Ponto de entrada mínimo
+**Status**: Minimal entry point
 
-### API de Analytics (`services/api/analytics/`)
+### Analytics API (`services/api/analytics/`)
 - Python + FastAPI + SQLAlchemy
-- Acesso a dados de silver/gold
+- Access to silver/gold data
 
-**Status**: Funcional
+**Status**: Functional
 
 ### ETL (`etl/`)
-- Airflow para orquestração
-- dbt para transformação
-- Google Trends como fonte
+- Airflow for orchestration
+- dbt for transformation
+- Google Trends as data source
 
-**Status**: Funcional
+**Status**: Functional
 
-## Fluxos Principais
+## Main Flows
 
-### Criação de Reserva e Pagamento
+### Reservation and Payment Creation
 
 ```
-1. Operador cria reserva no frontend
-2. BFF recebe e encaminha para API de Reservas
-3. API de Reservas persiste em PENDING_PAYMENT
-4. Evento ReservaCriada é publicado no Event Bus
-5. API de Pagamentos processa pagamento com gateway
-6. Resultado é publicado (confirmado ou recusado)
-7. API de Reservas atualiza status da reserva
-8. Frontend reflete o novo estado
+1. Operator creates reservation in frontend
+2. BFF receives and forwards to Reservations API
+3. Reservations API persists in PENDING_PAYMENT
+4. ReservationCreated event published to Event Bus
+5. Payments API processes payment with gateway
+6. Result published (confirmed or rejected)
+7. Reservations API updates reservation status
+8. Frontend reflects new state
 ```
 
-Diagrama detalhado: [`docs/diagrams/flow-booking-payments.md`](docs/diagrams/flow-booking-payments.md)
+Detailed diagram: [`docs/diagrams/flow-booking-payments.md`](docs/diagrams/flow-booking-payments.md)
 
 ### Analytics
 
 ```
-1. Airflow extrai Google Trends diariamente
-2. Dados brutos são persistidos em staging
-3. dbt transforma em modelos silver/gold
-4. API de Analytics expõe dados via endpoints REST
-5. Frontend ou ferramentas externas consultam a API
+1. Airflow extracts Google Trends daily
+2. Raw data persisted in staging
+3. dbt transforms into silver/gold models
+4. Analytics API exposes data via REST endpoints
+5. Frontend or external tools query the API
 ```
 
-Diagrama detalhado: [`docs/diagrams/flow-analytics.md`](docs/diagrams/flow-analytics.md)
+Detailed diagram: [`docs/diagrams/flow-analytics.md`](docs/diagrams/flow-analytics.md)
 
-## Decisões Importantes
+## Key Decisions
 
-Todas as decisões arquiteturais relevantes foram documentadas como ADRs:
+All relevant architectural decisions are documented as ADRs:
 
-| ADR | Decisão | Status |
-|-----|---------|--------|
-| [001](docs/decisions/adr-001-separate-booking-and-payments-apis.md) | Separação de Reservas e Pagamentos em APIs distintas | Aceita |
-| [002](docs/decisions/adr-002-bff-pattern.md) | Adoção de Backend-for-Frontend | Aceita |
-| [003](docs/decisions/adr-003-event-bus-pattern.md) | Comunicação assíncrona via Event Bus | Aceita |
-| [004](docs/decisions/adr-004-analytics-db.md) | Banco de dados analítico separado | Aceita |
+| ADR | Decision | Status |
+|-----|----------|--------|
+| [001](docs/decisions/adr-001-separate-booking-and-payments-apis.md) | Separation of Reservations and Payments into distinct APIs | Accepted |
+| [002](docs/decisions/adr-002-bff-pattern.md) | Adoption of Backend-for-Frontend | Accepted |
+| [003](docs/decisions/adr-003-event-bus-pattern.md) | Asynchronous communication via Event Bus | Accepted |
+| [004](docs/decisions/adr-004-analytics-db.md) | Separate analytics database | Accepted |
 
-Leia as justificativas completas em [`docs/decisions/`](docs/decisions/).
+Read full justifications in [`docs/decisions/`](docs/decisions/).
 
-## Estado Atual
+## Current State
 
-A implementação está em evolução:
+Implementation is evolving:
 
-- ✅ **Funcional**: Frontend, Analytics API, ETL
-- 🚧 **Parcial**: BFF, API de Pagamentos
-- ❌ **Não iniciado**: API de Reservas, Event Bus
+- Functional: Frontend, Analytics API, ETL
+- Partial: BFF, Payments API
+- Not started: Reservations API, Event Bus
 
-Detalhes completos em [`docs/deployment/current.md`](docs/deployment/current.md) e [`docs/issues/Master-plan.md`](docs/issues/Master-plan.md).
+Complete details in [`docs/deployment/current.md`](docs/deployment/current.md) and [`docs/issues/Master-plan.md`](docs/issues/Master-plan.md).
 
-## Próximos Passos
+## Next Steps
 
-1. **Implementar API de Reservas** — Core da funcionalidade de agendamento
-2. **Completar fluxo de Pagamentos** — Integração com gateway externo
-3. **Implementar Event Bus** — Comunicação assíncrona entre serviços
-4. **Adicionar testes E2E** — Validar fluxos principais
-5. **Documentar deployment final** — CI/CD para produção
+1. **Implement Reservations API** — Core scheduling functionality
+2. **Complete Payments flow** — External gateway integration
+3. **Implement Event Bus** — Asynchronous service communication
+4. **Add E2E tests** — Validate main flows
+5. **Document final deployment** — CI/CD for production
 
-Confira o plano detalhado em [`docs/issues/Master-plan.md`](docs/issues/Master-plan.md).
+See detailed plan in [`docs/issues/Master-plan.md`](docs/issues/Master-plan.md).
 
-## Documentação
+## Documentation
 
-- **[Guia de Documentação](docs/README.md)** — Como navegar e evoluir a documentação
-- **[Arquitetura](docs/architecture/)** — Modelo conceitual (C4)
-- **[Decisões](docs/decisions/)** — ADRs justificando escolhas
-- **[Deployment](docs/deployment/)** — Estado e estratégia de implementação
-- **[Diagramas](docs/diagrams/)** — Fluxos e topologia visual
-- **[Issues de Evolução](docs/issues/)** — Planejamento e state de mudanças
+- **[Documentation Guide](docs/README.md)** — How to navigate and evolve documentation
+- **[Architecture](docs/architecture/)** — Conceptual model (C4)
+- **[Decisions](docs/decisions/)** — ADRs justifying choices
+- **[Deployment](docs/deployment/)** — Implementation state and strategy
+- **[Diagrams](docs/diagrams/)** — Flows and visual topology
+- **[Evolution Issues](docs/issues/)** — Planning and change state
 
-## Governança
+## Governance
 
-Este repositório segue a metodologia **Spec-Driven Development (SDD)** com **Harness Engineering** para garantir que mudanças sejam:
+This repository follows **Spec-Driven Development (SDD)** methodology with **Harness Engineering** to ensure changes are:
 
-- Especificadas explicitamente
-- Rastreáveis a requisitos
-- Verificáveis através de testes
-- Documentadas para continuidade
+- Explicitly specified
+- Traceable to requirements
+- Verifiable through tests
+- Documented for continuity
 
-Consulte [`AGENTS.md`](AGENTS.md) para os princípios de operação.
+See [`AGENTS.md`](AGENTS.md) for operational principles.
 
-## Convenções
+## Conventions
 
-- Documentação em português do Brasil (pt-BR)
-- Código em inglês
-- Diagramas como código (Mermaid)
-- Decisões formalizadas como ADRs
-- Especificações antes da implementação
+- Documentation in Portuguese (pt-BR) and English
+- Code in English
+- Diagrams as code (Mermaid)
+- Decisions formalized as ADRs
+- Specifications before implementation
 
 ---
 
-**Última atualização**: 2026-08-30  
-**Status**: Arquitetura documentada, implementação em progresso
+**Last updated**: 2026-08-30  
+**Status**: Architecture documented, implementation in progress
