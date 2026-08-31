@@ -29,3 +29,9 @@ class PostgresHandler(DataHandler):
         with self.engine.begin() as conn:
             conn.execute(text(query), data)
         return len(data)
+
+    def fetch_all(self, query: str, params: dict = None) -> List[dict]:
+        """Executa query e retorna todas as linhas como lista de dicionários."""
+        with self.engine.begin() as conn:
+            result = conn.execute(text(query), params or {})
+            return [dict(row._mapping) for row in result]

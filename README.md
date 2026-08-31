@@ -33,6 +33,9 @@ The system is organized as a microservices architecture with clear separation of
 4. Review current implementation state:
    - [`docs/deployment/current.md`](docs/deployment/current.md) — What is implemented
 
+5. See live application at:
+   - Link: https://marca-platform.vercel.app/
+
 ## Repository Structure
 
 ```

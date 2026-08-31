@@ -34,6 +34,9 @@ O sistema é organizado como uma arquitetura de microsserviços com separação 
 4. Revise o estado atual de implementação:
    - [`docs/deployment/current.md`](docs/deployment/current.md) — O que está implementado
 
+5. Veja a aplicação ao vivo em: 
+   - Link: https://marca-platform.vercel.app/
+
 ## Estrutura do Repositório
 
 ```
