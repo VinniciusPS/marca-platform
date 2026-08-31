@@ -17,7 +17,7 @@ class PatientTable(Base):
 class CapacityAlertView(Base):
     """Mapeamento da View gld__capacity_alert no schema gold."""
     __tablename__ = "gld__capacity_alert"
-    __table_args__ = {"schema": "silver"}
+    __table_args__ = {"schema": "gold"}
 
     # SQLAlchemy exige uma 'primary_key' para mapear, mesmo que seja uma View.
     # Usaremos o nome do profissional como identificador lógico.
@@ -35,7 +35,7 @@ class CapacityAlertView(Base):
 class MktDecisionView(Base):
     """Mapeamento da View gld__mkt_decision no schema gold."""
     __tablename__ = "gld__mkt_decision_matrix"
-    __table_args__ = {"schema": "silver"}
+    __table_args__ = {"schema": "gold"}
 
     specialty: Mapped[str] = mapped_column(String(50), primary_key=True)
     scenario_delta: Mapped[int] = mapped_column(Integer)
