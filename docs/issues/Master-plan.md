@@ -55,6 +55,7 @@ A estrutura atual mistura:
 | Ordem | ID | Problema | Status | Dependências |
 | ----: | -- | -------- | ------ | ------------ |
 | 1 | P1 | Estado atual da arquitetura | COMPLETED | — |
+| 2 | P2 | DAG de população de clinic | COMPLETED | P1 |
 
 ## 4. Mapa estrutural do sistema
 
