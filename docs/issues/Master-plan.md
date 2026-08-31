@@ -56,6 +56,7 @@ A estrutura atual mistura:
 | ----: | -- | -------- | ------ | ------------ |
 | 1 | P1 | Estado atual da arquitetura | COMPLETED | — |
 | 2 | P2 | DAG de população de clinic | COMPLETED | P1 |
+| 3 | P3 | DAG de população de operations | COMPLETED | P2 |
 
 ## 4. Mapa estrutural do sistema
 
